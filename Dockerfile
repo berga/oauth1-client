@@ -1,7 +1,3 @@
-# FROM composer:1.10 as build
-# COPY composer.json .
-# RUN composer update
-
 FROM php:8-alpine
 LABEL Name=oauth1client Version=0.0.1
 
@@ -20,8 +16,6 @@ RUN mkdir public && \
   printf "\n<Directory \"/app/public\">\n\tAllowOverride All\n</Directory>\n" >> /etc/apache2/httpd.conf && \
   printf "\nPassEnv endpoint callbackuri clientid clientsecret\n" >> /etc/apache2/httpd.conf && \
   cp php.ini-development /etc/php7/php.ini
-
-# COPY --from=build /app/vendor vendor
 
 EXPOSE 80 443
 
