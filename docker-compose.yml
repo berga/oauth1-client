@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  oauth1client:
+    image: oauth1client
+    env_file: 
+      - .env
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports: 
+      - "80:80"

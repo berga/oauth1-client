@@ -96,6 +96,8 @@ abstract class Server
         $headers = $this->buildHttpClientHeaders($authorizationHeader);
 
         try {
+            var_dump($uri);
+            echo("<p>");
             $response = $client->post($uri, [
                 'headers' => $headers,
             ]);

@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  oauth1client:
+    image: oauth1client
+    build:
+      context: .
+      dockerfile: ./Dockerfile
