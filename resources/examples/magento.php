@@ -62,7 +62,7 @@ if (isset($_GET['user'])) {
     session_write_close();
 
     // Redirect to the user page
-    header("Location: http://{$_SERVER['HTTP_HOST']}{$_SERVER['SERVER_PORT']}/?user=user");
+    header("Location: ".getenv('callbackuri')."/?user=user");
     exit;
 
 // Step 2.5 - denied request to authorize client

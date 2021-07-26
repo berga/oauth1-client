@@ -1,14 +1,16 @@
-FROM composer:1.10 as build
-COPY composer.json .
-RUN composer install
+# FROM composer:1.10 as build
+# COPY composer.json .
+# RUN composer update
 
 FROM php:8-alpine
 LABEL Name=oauth1client Version=0.0.1
-# RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
-RUN apk add php7-apache2 php7-session
+RUN apk add php7-apache2 php7-session composer
 
 WORKDIR /app
+
+COPY composer.json .
+RUN composer update
 
 COPY . .
 RUN mkdir public && \
@@ -19,8 +21,7 @@ RUN mkdir public && \
   printf "\nPassEnv endpoint callbackuri clientid clientsecret\n" >> /etc/apache2/httpd.conf && \
   cp php.ini-development /etc/php7/php.ini
 
-
-COPY --from=build /app/vendor vendor
+# COPY --from=build /app/vendor vendor
 
 EXPOSE 80 443
 
